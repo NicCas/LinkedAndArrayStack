@@ -23,15 +23,13 @@ public class LinkedStack<T> implements StackInterface <T>
      */
     public T pop()
     {
-        try {
+        if (qtyOfItems == 0)
+            throw new EmptyStackException();
+        else {
             T popped = top.item;
             top = top.next;
             qtyOfItems --;
             return popped;
-
-        } catch (EmptyStackException stackEmpty) {
-            System.out.println("Error: Stack is empty, 'pop' cannot be executed");
-            return null;
         }
     }
 
@@ -42,13 +40,10 @@ public class LinkedStack<T> implements StackInterface <T>
      */
     public T peek()
     {
-        try {
+        if (qtyOfItems == 0)
+            throw new EmptyStackException();
+        else
             return top.item;
-
-        } catch (EmptyStackException stackEmpty) {
-            System.out.println("Error: Stack is empty, 'pop' cannot be executed");
-            return null;
-        }
     }
 
     /**

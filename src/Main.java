@@ -2,6 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        /*
         StackInterface<Integer> array = new ArrayStack<>();
         array.push(4);
         array.push(9);
@@ -11,6 +12,8 @@ public class Main {
         array.clear();
 
         System.out.println("Stack is empty: " + array.peek());
+        */
+
 
 
         StackInterface<Integer> link = new LinkedStack<>();

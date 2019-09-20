@@ -1,6 +1,6 @@
 import java.util.EmptyStackException;
 
-public class ArrayStack<T> implements StackInterface <T>
+public class ArrayStack <T> implements StackInterface <T>
 {
     public static final int minSize = 50;
     public static final int maxSize = 10000;
@@ -49,17 +49,15 @@ public class ArrayStack<T> implements StackInterface <T>
      */
     public T pop()
     {
-        try
-        {
+        if (qtyOfItems == 0)
+            throw new EmptyStackException();
+        else {
+            // return top element
             // return top element and set to null
             qtyOfItems--;
             T popped = stack[qtyOfItems];
             stack[qtyOfItems] = null;
             return popped;
-
-        } catch (ArrayIndexOutOfBoundsException stackEmpty) {
-            System.out.println("Error: Stack is empty, 'pop' cannot be executed");
-            return null;
         }
     }
 
@@ -70,15 +68,12 @@ public class ArrayStack<T> implements StackInterface <T>
      */
     public T peek()
     {
-        try
-        {
+
+        if (qtyOfItems == 0)
+            throw new EmptyStackException();
+        else
             // return top element
             return stack[qtyOfItems--];
-
-        } catch (ArrayIndexOutOfBoundsException stackEmpty) {
-            System.out.println("Error: Stack is empty, 'peek' cannot be executed");
-        }
-        return null;
     }
 
     /**
@@ -96,8 +91,8 @@ public class ArrayStack<T> implements StackInterface <T>
     public void clear()
     {
         for (int i = 0; i < qtyOfItems; i++) {
-            stack[i] = null;
-            qtyOfItems = 0;
+            pop();
         }
+        qtyOfItems = 0;
     }
 }

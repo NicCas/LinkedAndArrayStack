@@ -36,16 +36,33 @@ public class InfixToPostfixConverter implements ExpressionConverterInterface
      *
      * Note: follow Java’s operator precedence rules for determining operator precedence
      */
-    char operand = 'A'; // temporary var, for place-holding
-
-   @Override
+    
     public String convert(String expression)
     {
         try {
+            StackInterface<Character> stack = new LinkedStack<>();
+            String outputExpression = null;
+
             for (int i = 0; i < expression.length(); i++)
             {
-                if (expression.charAt(i) == operand)
-                //push
+                // if the term is an operand append it to the end of the output expression
+                if (Character.isLetter(expression.charAt(i)))
+                    outputExpression += expression.charAt(i);
+
+                // else if the term is the ^ operator push it onto the stack
+                else if (expression.charAt(i) == '^')
+                    stack.push('^');
+
+                // else if the term is and operator +, -, *, or /
+                // pop operators from the stack appending them to the output expression
+                // until the stack is empty or the operator on the top of the stack has
+                // a lower precedence than the new operator. Then push the new operator
+                // onto the stack.
+                else if (expression.charAt(i) == '+' || expression.charAt(i) == '-' || expression.charAt(i) == '*' || expression.charAt(i) == '/') {
+                    
+                }
+                    
+
             }
         } catch (InvalidExpressionException thing) {
             System.out.println("InvalidExpressionException catch successful");
