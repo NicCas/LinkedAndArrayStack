@@ -38,17 +38,19 @@ public class InfixToPostfixConverter implements ExpressionConverterInterface
      */
     char operand = 'A'; // temporary var, for place-holding
 
-   //@Override
+   @Override
     public String convert(String expression)
     {
-        for (int i = 0; i < expression.length(); i++)
-        {
-            if (expression.charAt(i) == operand)
+        try {
+            for (int i = 0; i < expression.length(); i++)
+            {
+                if (expression.charAt(i) == operand)
                 //push
+            }
+        } catch (InvalidExpressionException thing) {
+            System.out.println("InvalidExpressionException catch successful");
         }
 
-
-        //throw new InvalidExpressionException();
         return null;
     }
 }
