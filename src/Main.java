@@ -2,6 +2,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        InfixToPostfixConverter thing = new InfixToPostfixConverter();
+
+        System.out.println(thing.convert("A+B"));
+
         /*
         StackInterface<Integer> array = new ArrayStack<>();
         array.push(4);
@@ -12,7 +16,7 @@ public class Main {
         array.clear();
 
         System.out.println("Stack is empty: " + array.peek());
-        */
+
 
 
 
@@ -27,6 +31,8 @@ public class Main {
         link.clear();
 
         System.out.println("Stack is empty: " + link.peek());
+
+         */
 
     }
 }
