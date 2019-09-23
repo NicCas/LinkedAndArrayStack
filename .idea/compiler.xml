@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <excludeFromCompile>
-      <file url="file://$PROJECT_DIR$/src/InfixToPostfixConverter.java" />
+      <directory url="file://$APPLICATION_HOME_DIR$/bin" includeSubdirectories="false" />
     </excludeFromCompile>
   </component>
 </project>

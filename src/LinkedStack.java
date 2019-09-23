@@ -21,8 +21,7 @@ public class LinkedStack<T> implements StackInterface <T>
      * @return  The object at the top of the stack.
      * @throws EmptyStackException if the stack is empty before the operation.
      */
-    public T pop()
-    {
+    public T pop() {
         if (qtyOfItems == 0)
             throw new EmptyStackException();
         else {

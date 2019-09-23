@@ -1,10 +1,10 @@
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidExpressionException {
 
-        InfixToPostfixConverter thing = new InfixToPostfixConverter();
+        ExpressionConverterInterface thing = new InfixToPostfixConverter();
 
-        System.out.println(thing.convert("A+B"));
+        System.out.println(thing.convert("A-B+(C*D^E)-F"));
 
         /*
         StackInterface<Integer> array = new ArrayStack<>();

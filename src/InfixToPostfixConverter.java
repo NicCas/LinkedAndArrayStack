@@ -1,16 +1,21 @@
 public class InfixToPostfixConverter implements ExpressionConverterInterface
 {
     private StackInterface<Character> stack;
-    private String outputExpression = null;
+    private String outputExpression = "";
 
-    public InfixToPostfixConverter(){
+    public InfixToPostfixConverter()
+    {
         stack = new LinkedStack<>();
     }
-    public InfixToPostfixConverter(StackInterface<Character> stack){
+    public InfixToPostfixConverter(StackInterface<Character> stack)
+    {
         stack = new ArrayStack();
     }
 
     /**
+     * These comments are from the provided documents for this assignment and are reprinted before my code to provide a
+     * roadmap for myself.
+     *
      * Infix to Postfix Converter Algorithm:
      *
      *  for each term in the infix expression
@@ -48,7 +53,7 @@ public class InfixToPostfixConverter implements ExpressionConverterInterface
      */
 
     @Override
-    public String convert(String expression) //throws InvalidExpressionException
+    public String convert(String expression) throws InvalidExpressionException //throws InvalidExpressionException
     {
         for (int i = 0; i < expression.length(); i++)
         {
@@ -60,16 +65,16 @@ public class InfixToPostfixConverter implements ExpressionConverterInterface
             else if (expression.charAt(i) == '^')
                 stack.push(expression.charAt(i));
 
-            // else if the term is an operator +, -, *, or
+                // else if the term is an operator +, -, *, or
                 // pop operators from the stack appending them to the output expression
                 // until the stack is empty or the operator on the top of the stack has
                 // a lower precedence than the new operator. Then push the new operator
                 // onto the stack.
-            else if (expression.charAt(i) == '+' || expression.charAt(i) == '-' || expression.charAt(i) == '*' || expression.charAt(i) == '/')
+            else if ( expression.charAt(i) == '+' || expression.charAt(i) == '-' || expression.charAt(i) == '*' || expression.charAt(i) == '/' )
             {
                 while (!stack.isEmpty())
                 {
-                    if (checkPrecedence(expression.charAt(i)) <= checkPrecedence(stack.peek()) && (stack.peek() != '('))
+                    if ( checkPrecedence(expression.charAt(i)) <= checkPrecedence(stack.peek()) )
                         outputExpression += stack.pop();
                     else
                         break;
@@ -82,9 +87,9 @@ public class InfixToPostfixConverter implements ExpressionConverterInterface
             else if (expression.charAt(i) == '(')
                 stack.push(expression.charAt(i));
 
-            // else if the term is a ) pop operators from the stack and append them to the output expression
-            // until the ( delimiter is found. discard both ( and ), they should not be
-            // appended to the output expression.
+                // else if the term is a ) pop operators from the stack and append them to the output expression
+                // until the ( delimiter is found. discard both ( and ), they should not be
+                // appended to the output expression.
             else if (expression.charAt(i) == ')')
             {
                 while (stack.peek() != '(')
@@ -97,11 +102,9 @@ public class InfixToPostfixConverter implements ExpressionConverterInterface
             else if (expression.charAt(i) == ' ')
                 continue;
 
-            // else if the term is unknown throw an InvalidExpressionException
-            else {
-                //throw InvalidExpressionException();
-                System.out.println("Error");
-            }
+                // else if the term is unknown throw an InvalidExpressionException
+            else
+                throw new InvalidExpressionException();
         }
 
         while (!stack.isEmpty())
@@ -112,14 +115,15 @@ public class InfixToPostfixConverter implements ExpressionConverterInterface
             if (stack.peek() != '(')
                 outputExpression += stack.pop();
             else
-               // throw new InvalidExpressionException();
-                System.out.println("Error");
+               throw new InvalidExpressionException();
         }
 
         return outputExpression;
     }
 
-    private int checkPrecedence(char operator) {
+    // Assign the precedence of each operator. These values are based on Java's own numerical values for each symbol
+    private int checkPrecedence(char operator) throws InvalidExpressionException
+    {
         switch (operator)
         {
             case '^':
@@ -127,12 +131,15 @@ public class InfixToPostfixConverter implements ExpressionConverterInterface
             case '+':
             case '-':
                 return 14;
-            case ')':
-            case '(':
-                return 13;
             case '*':
             case '/':
                 return 12;
+            case '(':
+                // '(' is usually of precedence 16, but for this algorithm popping should stop at any '(', thus the low
+                // number
+                return -1;
+            default:
+                throw new InvalidExpressionException();
         }
     }
 }
